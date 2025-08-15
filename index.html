@@ -159,6 +159,7 @@ function render(){
   localStorage.setItem(storeKey, JSON.stringify(rows));
 }
 
+
 $('#entryForm').addEventListener('submit', e=>{
   e.preventDefault();
   const item = {
@@ -219,7 +220,19 @@ if(!rows.length){
   rows = [
     {date:new Date().toISOString().slice(0,10), type:'income', category:'Kurye', note:'Günlük kazanç', amount:1200},
     {date:new Date().toISOString().slice(0,10), type:'expense', category:'Yakıt', note:'Benzin', amount:350},
-  ];
+  ];// Sayfa yüklenince kaydedilmiş verileri yükle
+const kayitliVeri = localStorage.getItem("gelirGiderData");
+if (kayitliVeri) {
+    tabloVerileri = JSON.parse(kayitliVeri);
+    tabloyuGuncelle();
+}
+
+// Veri eklenince kaydet
+function veriEkle() {
+    // ... mevcut ekleme kodun ...
+    localStorage.setItem("gelirGiderData", JSON.stringify(tabloVerileri));
+}
+
 }
 render();
 </script>
